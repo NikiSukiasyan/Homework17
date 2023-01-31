@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Homework</title>
+  </head>
+  <body>
+    <button id="Just-button">remove</button>
+
+    <div id="form">
+      <input type="text" id="inputField" />
+      <button id="submitBtn">Submit</button>
+      <p id="output"></p>
+    </div>
+
+    <div id="user-list"></div>
+  </body>
+
+  <script>
+    document
+      .getElementById("Just-button")
+      .addEventListener("click", function () {
+        this.remove();
+      });
+
+    let img = document.createElement("img");
+    img.setAttribute("src", "https://i.ytimg.com/vi/VEx5hNYeZtY/hqdefault.jpg");
+    document.body.appendChild(img);
+
+    let inputField = document.getElementById("inputField");
+    let submitBtn = document.getElementById("submitBtn");
+    let output = document.getElementById("output");
+    let values = [];
+
+    submitBtn.addEventListener("click", function () {
+      let inputValue = inputField.value;
+      output.innerHTML = inputValue;
+      values.push(inputValue);
+    });
+
+    const users = [
+      {
+        id: 7,
+        email: "michael.lawson@reqres.in",
+        first_name: "Michael",
+        last_name: "Lawson",
+        avatar: "https://reqres.in/img/faces/7-image.jpg",
+      },
+      {
+        id: 8,
+        email: "lindsay.ferguson@reqres.in",
+        first_name: "Lindsay",
+        last_name: "Ferguson",
+        avatar: "https://reqres.in/img/faces/8-image.jpg",
+      },
+      {
+        id: 9,
+        email: "tobias.funke@reqres.in",
+        first_name: "Tobias",
+        last_name: "Funke",
+        avatar: "https://reqres.in/img/faces/9-image.jpg",
+      },
+      {
+        id: 10,
+        email: "byron.fields@reqres.in",
+        first_name: "Byron",
+        last_name: "Fields",
+        avatar: "https://reqres.in/img/faces/10-image.jpg",
+      },
+    ];
+
+    let userCards = "";
+    for (let i = 0; i < 4; i++) {
+      userCards += `<div class="user-card" id="user-${users[i].id}" style="display: inline-block; padding: 16px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+    <img src="${users[i].avatar}" alt="Avatar" style="width: 100px; height: 100px; border-radius: 10%;">
+    <h4 style="margin-top: 16px; font-size: 18px; font-weight: 400;">${users[i].first_name} ${users[i].last_name}</h4>
+    <button class="info-btn">Info</button>
+    <button class="delete-btn">Delete</button>
+    <p class="email" style="display: none; text-align: center;">${users[i].email}</p>
+  </div>`;
+    }
+    document.querySelector("#user-list").innerHTML = userCards;
+
+    const infoButtons = document.querySelectorAll(".info-btn");
+    infoButtons.forEach((button) => {
+      button.addEventListener("click", (event) => {
+        const email = event.target.parentElement.querySelector(".email");
+        email.style.display = "block";
+      });
+    });
+
+    const deleteButtons = document.querySelectorAll(".delete-btn");
+    deleteButtons.forEach((button) => {
+      button.addEventListener("click", (event) => {
+        const userCard = event.target.parentElement;
+        userCard.remove();
+      });
+    });
+  </script>
+</html>
